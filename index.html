@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>話すだけで、本になる。| 森の聞き書き出版</title>
+<meta name="description" content="喜寿・還暦・定年退職・金婚式の節目に。マイクに向かって3時間話すだけで、AIとプロ編集者があなたの人生を一冊の本にします。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700;900&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ===================================================
+   CSS CUSTOM PROPERTIES
+   =================================================== */
+:root {
+  --bg:         #FDFBF7;
+  --bg-light:   #F4F1EA;
+  --bg-dark:    #2C2A29;
+  --text:       #2C2A29;
+  --muted:      #7a6f66;
+  --accent:     #B08C5D;
+  --accent-dk:  #8C6C42;
+  --accent-bg:  rgba(176, 140, 93, 0.12);
+  --border:     rgba(176, 140, 93, 0.22);
+  --shadow-sm:  0 4px 16px rgba(44, 42, 41, 0.08);
+  --shadow:     0 8px 32px rgba(44, 42, 41, 0.12);
+  --shadow-lg:  0 20px 60px rgba(44, 42, 41, 0.18);
+  --max-w:      1100px;
+}
+
+/* ===================================================
+   RESET & BASE
+   =================================================== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.82;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ===================================================
+   LAYOUT UTILITIES
+   =================================================== */
+.wrap {
+  max-width: var(--max-w);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.serif {
+  font-family: 'Noto Serif JP', serif;
+}
+
+/* ===================================================
+   SCROLL ANIMATION
+   =================================================== */
+.js-fade {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js-fade.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.js-fade.delay-1 { transition-delay: 0.10s; }
+.js-fade.delay-2 { transition-delay: 0.20s; }
+.js-fade.delay-3 { transition-delay: 0.30s; }
+.js-fade.delay-4 { transition-delay: 0.40s; }
+
+/* ===================================================
+   HEADER
+   =================================================== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: rgba(253, 251, 247, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header .wrap {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-logo {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.14em;
+}
+
+.header-cta {
+  display: none;
+  background-color: var(--text);
+  color: var(--bg);
+  padding: 10px 22px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  transition: background-color 0.25s;
+}
+
+.header-cta:hover {
+  background-color: var(--accent);
+}
+
+@media (min-width: 640px) {
+  .header-cta {
+    display: inline-block;
+  }
+}
+
+/* ===================================================
+   HERO
+   =================================================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: #1e1b18;
+  background-image: url('hero.png');
+  background-size: cover;
+  background-position: center center;
+  color: #f5f0e8;
+  padding-top: 64px;
+}
+
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 900px 600px at 8% 45%, rgba(176, 140, 93, 0.22), transparent 55%),
+    radial-gradient(ellipse 600px 500px at 78% 18%, rgba(140, 108, 66, 0.16), transparent 55%),
+    radial-gradient(ellipse 400px 400px at 55% 88%, rgba(176, 140, 93, 0.10), transparent 50%),
+    linear-gradient(rgba(10, 8, 5, 0.60), rgba(10, 8, 5, 0.60));
+  pointer-events: none;
+}
+
+.hero-lines {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 42%;
+  opacity: 0.06;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 42px,
+    rgba(245, 240, 232, 0.15) 42px,
+    rgba(245, 240, 232, 0.15) 44px
+  );
+  pointer-events: none;
+}
+
+.hero-body {
+  position: relative;
+  z-index: 2;
+  max-width: 660px;
+  padding: 72px 48px 80px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 30px;
+  padding: 8px 20px;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 28px;
+  color: rgba(245, 240, 232, 0.82);
+}
+
+.hero-h1 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(2.8rem, 6.5vw, 4.6rem);
+  font-weight: 900;
+  line-height: 1.22;
+  margin-bottom: 22px;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+}
+
+.hero-h1 .accent-text {
+  background: linear-gradient(90deg, #D4B48A 0%, #B08C5D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-lead {
+  font-size: clamp(0.92rem, 2vw, 1.08rem);
+  line-height: 1.95;
+  opacity: 0.84;
+  margin-bottom: 40px;
+  max-width: 530px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 36px;
+  flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+
+.stat-num {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: #D4B48A;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 0.76rem;
+  opacity: 0.7;
+}
+
+.hero-btn {
+  display: inline-block;
+  background-color: var(--accent);
+  color: #ffffff;
+  padding: 18px 48px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border-radius: 3px;
+  box-shadow: 0 8px 32px rgba(176, 140, 93, 0.42);
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.hero-btn:hover {
+  background-color: var(--accent-dk);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(176, 140, 93, 0.52);
+}
+
+/* 本の背表紙装飾 */
+.hero-books {
+  position: absolute;
+  right: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.book-spine {
+  height: 128px;
+  border-radius: 4px 12px 12px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.75);
+  writing-mode: vertical-rl;
+  letter-spacing: 0.14em;
+  box-shadow: 4px 6px 20px rgba(0, 0, 0, 0.55);
+  padding: 0 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.book-spine::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 7px;
+  background-color: rgba(0, 0, 0, 0.22);
+}
+
+.bs1 { background: linear-gradient(180deg, #8b7355, #5c4033); width: 62px; transform: rotate(-2deg); }
+.bs2 { background: linear-gradient(180deg, #B08C5D, #7a5f3a); width: 68px; transform: rotate(2deg); }
+.bs3 { background: linear-gradient(180deg, #a8906e, #7a5c40); width: 58px; transform: rotate(-1deg); }
+.bs4 { background: linear-gradient(180deg, #6b5c4e, #3d3028); width: 65px; transform: rotate(3deg); }
+
+/* スクロールヒント */
+.scroll-hint {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  opacity: 0.4;
+  color: #f5f0e8;
+}
+
+.scroll-arrow {
+  width: 18px;
+  height: 18px;
+  border-right: 1.5px solid #f5f0e8;
+  border-bottom: 1.5px solid #f5f0e8;
+  transform: rotate(45deg);
+  animation: scroll-bounce 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50%       { transform: rotate(45deg) translateY(6px); }
+}
+
+/* ===================================================
+   SECTION SHARED
+   =================================================== */
+.section {
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+.section--light {
+  background-color: var(--bg-light);
+}
+
+.section--white {
+  background-color: var(--bg);
+}
+
+.section--dark {
+  background-color: var(--bg-dark);
+  color: #f5f0e8;
+}
+
+.eyebrow {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.eyebrow--center {
+  text-align: center;
+}
+
+.section-h2 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1.45;
+  margin-bottom: 16px;
+}
+
+.section-h2--center {
+  text-align: center;
+}
+
+.section-hr {
+  border: none;
+  height: 2px;
+  width: 44px;
+  background-color: var(--accent);
+  margin-bottom: 48px;
+}
+
+.section-hr--center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===================================================
+   PROBLEM
+   =================================================== */
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 22px;
+}
+
+.problem-card {
+  background-color: var(--bg);
+  padding: 34px 28px;
+  border-top: 3px solid var(--accent);
+  box-shadow: var(--shadow);
+}
+
+.problem-icon  { font-size: 2.2rem; margin-bottom: 12px; }
+.problem-title { font-family: 'Noto Serif JP', serif; font-size: 1.02rem; font-weight: 700; margin-bottom: 8px; }
+.problem-desc  { font-size: 0.88rem; color: var(--muted); line-height: 1.88; }
+
+/* ===================================================
+   CONCEPT
+   =================================================== */
+.concept-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.concept-quote {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.1rem, 2.3vw, 1.45rem);
+  line-height: 2;
+  padding: 36px 36px 36px 48px;
+  background-color: var(--bg-light);
+  border-left: 4px solid var(--accent);
+  position: relative;
+}
+
+.concept-quote::before {
+  content: '\201C';
+  position: absolute;
+  top: 10px;
+  left: 14px;
+  font-size: 5rem;
+  color: var(--accent);
+  opacity: 0.22;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+.concept-text {
+  font-size: 0.98rem;
+  line-height: 2.05;
+  color: var(--muted);
+}
+
+.concept-text strong {
+  color: var(--text);
+}
+
+.concept-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 26px;
+}
+
+.concept-tag {
+  background-color: var(--accent-bg);
+  border: 1px solid var(--border);
+  color: var(--accent-dk);
+  padding: 6px 15px;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+/* ===================================================
+   WHO FOR
+   =================================================== */
+.who-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
+}
+
+.who-card {
+  background-color: var(--bg);
+  padding: 30px 22px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.who-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+
+.who-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.who-card:hover::after {
+  transform: scaleX(1);
+}
+
+.who-icon     { font-size: 2.6rem; margin-bottom: 10px; }
+.who-title    { font-family: 'Noto Serif JP', serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 7px; }
+.who-sub      { font-size: 0.8rem; color: var(--muted); line-height: 1.72; }
+.who-occasion {
+  display: inline-block;
+  background-color: var(--accent-bg);
+  color: var(--accent-dk);
+  font-size: 0.72rem;
+  padding: 3px 12px;
+  border-radius: 20px;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+/* ===================================================
+   LEGACY
+   =================================================== */
+.legacy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 26px;
+}
+
+.legacy-card {
+  background-color: var(--bg-light);
+  padding: 42px 34px;
+  position: relative;
+  overflow: hidden;
+}
+
+.legacy-num {
+  position: absolute;
+  top: 14px;
+  right: 22px;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(176, 140, 93, 0.1);
+  line-height: 1;
+}
+
+.legacy-icon  { font-size: 2.5rem; margin-bottom: 14px; }
+.legacy-title { font-family: 'Noto Serif JP', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; }
+.legacy-desc  { font-size: 0.9rem; line-height: 1.95; color: var(--muted); }
+
+/* ===================================================
+   PROCESS (dark section)
+   =================================================== */
+.process-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.process-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 700px 500px at 15% 70%, rgba(176, 140, 93, 0.13), transparent 55%),
+    radial-gradient(ellipse 500px 400px at 82% 22%, rgba(140, 108, 66, 0.10), transparent 50%);
+  pointer-events: none;
+}
+
+.process-bg .section-h2 {
+  color: #f5f0e8;
+}
+
+.process-bg .eyebrow {
+  color: var(--accent);
+}
+
+.process-lead {
+  text-align: center;
+  font-size: 1rem;
+  opacity: 0.7;
+  margin-bottom: 56px;
+}
+
+.process-steps {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.process-step {
+  text-align: center;
+  padding: 0 14px;
+  position: relative;
+}
+
+.process-step + .process-step::before {
+  content: '›';
+  position: absolute;
+  left: -10px;
+  top: 24px;
+  font-size: 1.6rem;
+  color: var(--accent);
+  opacity: 0.5;
+}
+
+.step-circle {
+  width: 70px;
+  height: 70px;
+  background-color: rgba(176, 140, 93, 0.18);
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  margin: 0 auto 14px;
+}
+
+.step-num   { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 8px; }
+.step-title { font-family: 'Noto Serif JP', serif; font-size: 0.92rem; font-weight: 700; margin-bottom: 8px; color: #f5f0e8; line-height: 1.55; }
+.step-desc  { font-size: 0.78rem; opacity: 0.66; line-height: 1.75; }
+
+/* ===================================================
+   AI × HUMAN
+   =================================================== */
+.ai-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 36px;
+  align-items: center;
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ai-panel {
+  background-color: var(--bg);
+  padding: 38px 30px;
+  box-shadow: var(--shadow);
+}
+
+.ai-panel--blue  { border-top: 4px solid #5b7fc4; }
+.ai-panel--gold  { border-top: 4px solid var(--accent); }
+
+.ai-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: #5b7fc4;
+  margin-bottom: 8px;
+}
+
+.ai-panel--gold .ai-label { color: var(--accent-dk); }
+
+.ai-icon  { font-size: 2.8rem; margin-bottom: 10px; }
+.ai-title { font-family: 'Noto Serif JP', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
+
+.ai-list { list-style: none; }
+
+.ai-list li {
+  padding: 8px 0 8px 20px;
+  position: relative;
+  font-size: 0.88rem;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.ai-list li:last-child {
+  border-bottom: none;
+}
+
+.ai-list li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  top: 13px;
+  font-size: 0.45rem;
+  color: #5b7fc4;
+}
+
+.ai-panel--gold .ai-list li::before {
+  color: var(--accent);
+}
+
+.ai-plus {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--accent);
+  opacity: 0.5;
+  text-align: center;
+}
+
+/* ===================================================
+   SCENES / USE CASES
+   =================================================== */
+.scenes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.scene-card {
+  background-color: var(--bg-light);
+  padding: 28px 24px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.scene-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.scene-card--wide { grid-column: span 2; }
+
+.scene-cat   { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 8px; text-transform: uppercase; }
+.scene-icon  { font-size: 2rem; margin-bottom: 10px; }
+.scene-title { font-family: 'Noto Serif JP', serif; font-size: 1rem; font-weight: 700; margin-bottom: 8px; line-height: 1.5; }
+.scene-desc  { font-size: 0.84rem; line-height: 1.88; color: var(--muted); }
+
+/* ===================================================
+   FAQ
+   =================================================== */
+.faq-list {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.faq-item {
+  background-color: var(--bg);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.faq-q {
+  padding: 20px 24px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.96rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+  list-style: none;
+}
+
+.faq-q::-webkit-details-marker { display: none; }
+
+.faq-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  background-color: var(--accent);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-style: normal;
+  font-weight: 300;
+  transition: transform 0.3s;
+}
+
+.faq-item.is-open .faq-icon {
+  transform: rotate(45deg);
+}
+
+.faq-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease;
+}
+
+.faq-body-inner {
+  padding: 0 24px 22px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.95;
+}
+
+/* ===================================================
+   MESSAGE
+   =================================================== */
+.message-inner {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.message-h2 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1.78;
+  margin-bottom: 36px;
+  text-align: center;
+}
+
+.message-body {
+  font-size: 1rem;
+  line-height: 2.1;
+  color: var(--muted);
+}
+
+.message-body p + p {
+  margin-top: 22px;
+}
+
+.message-accent {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.06rem;
+}
+
+.message-sign {
+  text-align: right;
+  margin-top: 36px;
+  border-top: 1px solid var(--border);
+  padding-top: 22px;
+}
+
+.message-sign p      { font-size: 0.82rem; color: var(--muted); letter-spacing: 0.1em; }
+.message-sign .name  { font-family: 'Noto Serif JP', serif; font-size: 1.9rem; font-weight: 600; color: var(--text); margin-top: 6px; }
+
+/* ===================================================
+   CTA / CONTACT
+   =================================================== */
+.cta-section {
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.cta-h2 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.75rem, 4vw, 2.8rem);
+  line-height: 1.52;
+  margin-bottom: 14px;
+}
+
+.cta-sub {
+  font-size: 1.02rem;
+  color: var(--muted);
+  max-width: 580px;
+  margin: 0 auto 40px;
+  line-height: 1.9;
+}
+
+.cta-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+.btn-primary {
+  background-color: var(--text);
+  color: var(--bg);
+  padding: 18px 44px;
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.25s;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid var(--text);
+  color: var(--text);
+  padding: 18px 44px;
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, transform 0.25s;
+}
+
+.btn-secondary:hover {
+  background-color: var(--text);
+  color: var(--bg);
+  transform: translateY(-2px);
+}
+
+/* ===================================================
+   FOOTER
+   =================================================== */
+.site-footer {
+  background-color: var(--bg-dark);
+  color: rgba(245, 240, 232, 0.6);
+  padding: 56px 24px 36px;
+}
+
+.footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto 44px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 50px;
+}
+
+.footer-brand h3 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.15rem;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.footer-brand p {
+  font-size: 0.84rem;
+  line-height: 1.9;
+}
+
+.footer-col h4 {
+  font-size: 0.74rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col li {
+  margin-bottom: 8px;
+}
+
+.footer-col a {
+  font-size: 0.84rem;
+  color: rgba(245, 240, 232, 0.52);
+  transition: color 0.2s;
+}
+
+.footer-col a:hover {
+  color: rgba(245, 240, 232, 0.9);
+}
+
+.footer-bottom {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 22px;
+  text-align: center;
+  font-size: 0.76rem;
+  opacity: 0.38;
+}
+
+/* ===================================================
+   IMAGE SECTION BACKGROUNDS
+   =================================================== */
+
+/* --- Legacy (regashi.png) --- */
+.section--bg-legacy {
+  background-color: var(--bg-dark);
+  background-image: url('regashi.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.section--bg-legacy::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 12, 8, 0.68);
+  pointer-events: none;
+}
+
+.section--bg-legacy .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.section--bg-legacy .eyebrow {
+  color: var(--accent);
+}
+
+.section--bg-legacy .section-h2 {
+  color: #f5f0e8;
+}
+
+.section--bg-legacy .legacy-card {
+  background-color: rgba(253, 251, 247, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.section--bg-legacy .legacy-title {
+  color: #f5f0e8;
+}
+
+.section--bg-legacy .legacy-desc {
+  color: rgba(245, 240, 232, 0.75);
+}
+
+.section--bg-legacy .legacy-num {
+  color: rgba(176, 140, 93, 0.22);
+}
+
+/* --- Pricing (price.png) --- */
+.section--bg-price {
+  background-color: var(--bg-dark);
+  background-image: url('price.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.section--bg-price::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 9, 6, 0.72);
+  pointer-events: none;
+}
+
+.section--bg-price .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.section--bg-price .eyebrow {
+  color: var(--accent);
+}
+
+.section--bg-price .section-h2 {
+  color: #f5f0e8;
+}
+
+.section--bg-price .section-sub {
+  color: rgba(245, 240, 232, 0.72);
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 48px;
+}
+
+/* 料金カード */
+.price-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.price-card {
+  background-color: rgba(253, 251, 247, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 44px 36px;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.price-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+}
+
+.price-card--featured {
+  background-color: rgba(176, 140, 93, 0.20);
+  border-color: var(--accent);
+}
+
+.price-badge {
+  display: inline-block;
+  background-color: var(--accent);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.price-plan-name {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #f5f0e8;
+  margin-bottom: 8px;
+}
+
+.price-plan-sub {
+  font-size: 0.82rem;
+  color: rgba(245, 240, 232, 0.65);
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
+
+.price-amount {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.price-amount span {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.price-tax {
+  font-size: 0.75rem;
+  color: rgba(245, 240, 232, 0.5);
+  margin-bottom: 28px;
+}
+
+.price-features {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 32px;
+}
+
+.price-features li {
+  padding: 9px 0 9px 22px;
+  position: relative;
+  font-size: 0.88rem;
+  color: rgba(245, 240, 232, 0.82);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.price-features li:last-child {
+  border-bottom: none;
+}
+
+.price-features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.price-cta {
+  display: block;
+  background-color: var(--accent);
+  color: #ffffff;
+  padding: 14px 24px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.price-cta:hover {
+  background-color: var(--accent-dk);
+}
+
+.price-card--featured .price-cta {
+  background-color: #f5f0e8;
+  color: var(--bg-dark);
+}
+
+.price-card--featured .price-cta:hover {
+  background-color: #ffffff;
+}
+
+.price-note {
+  text-align: center;
+  font-size: 0.82rem;
+  color: rgba(245, 240, 232, 0.5);
+  margin-top: 28px;
+}
+
+/* --- CTA (kachi.png) --- */
+.section--bg-cta {
+  background-color: var(--bg-dark);
+  background-image: url('kachi.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  border-top: none;
+}
+
+.section--bg-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 8, 5, 0.65);
+  pointer-events: none;
+}
+
+.section--bg-cta .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.section--bg-cta .cta-h2 {
+  color: #f5f0e8;
+}
+
+.section--bg-cta .cta-sub {
+  color: rgba(245, 240, 232, 0.78);
+}
+
+.section--bg-cta .btn-primary {
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+.section--bg-cta .btn-primary:hover {
+  background-color: var(--accent-dk);
+}
+
+.section--bg-cta .btn-secondary {
+  border-color: rgba(245, 240, 232, 0.6);
+  color: #f5f0e8;
+}
+
+.section--bg-cta .btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #f5f0e8;
+}
+
+/* ===================================================
+   RESPONSIVE
+   =================================================== */
+@media (max-width: 960px) {
+  .hero-books    { display: none; }
+  .concept-inner { grid-template-columns: 1fr; gap: 26px; }
+  .process-steps { grid-template-columns: 1fr 1fr 1fr; gap: 28px; }
+  .process-step + .process-step::before { display: none; }
+  .ai-inner      { grid-template-columns: 1fr; }
+  .ai-plus       { transform: rotate(90deg); }
+  .scenes-grid   { grid-template-columns: 1fr 1fr; }
+  .scene-card--wide { grid-column: span 1; }
+  .footer-inner  { grid-template-columns: 1fr; gap: 34px; }
+}
+
+@media (max-width: 600px) {
+  .section { padding-top: 72px; padding-bottom: 72px; }
+  .hero-body { padding: 56px 24px 64px; }
+  .scenes-grid { grid-template-columns: 1fr; }
+  .cta-btns  { flex-direction: column; }
+  .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+  .process-steps { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 400px) {
+  .process-steps { grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- =============================================
+     HEADER
+     ============================================= -->
+<header class="site-header">
+  <div class="wrap">
+    <div class="site-logo">森の聞き書き出版</div>
+    <a href="#contact" class="header-cta">無料相談を予約する</a>
+  </div>
+</header>
+
+<!-- =============================================
+     HERO
+     ============================================= -->
+<section class="hero" id="top">
+  <div class="hero-glow"></div>
+  <div class="hero-lines"></div>
+
+  <div class="hero-body js-fade">
+    <div class="hero-badge">📖 AI × プロ編集者が実現する、新しい聞き書き出版</div>
+    <h1 class="hero-h1">
+      <span class="accent-text">話すだけで、</span><br>
+      本になる。
+    </h1>
+    <p class="hero-lead">
+      有名人だけの自叙伝ではありません。喜寿、還暦、定年退職、金婚式の節目に。
+      一般の方が、マイクに向かって約3時間話すだけで、
+      AIとプロの編集者が一冊の本へと仕立てます。
+    </p>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">3時間</div>
+        <div class="stat-label">話すだけでOK</div>
+      </div>
+      <div>
+        <div class="stat-num">AI×人</div>
+        <div class="stat-label">プロが仕上げる</div>
+      </div>
+      <div>
+        <div class="stat-num">一冊</div>
+        <div class="stat-label">写真・挿絵・年表込み</div>
+      </div>
+    </div>
+    <a href="#contact" class="hero-btn">無料相談を申し込む →</a>
+  </div>
+
+  <div class="hero-books">
+    <div class="book-spine bs1">我が家の歩み</div>
+    <div class="book-spine bs2">昭和を生きた証</div>
+    <div class="book-spine bs3">母の七十年</div>
+    <div class="book-spine bs4">町工場の技と魂</div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-arrow"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- =============================================
+     PROBLEM
+     ============================================= -->
+<section class="section section--light" id="problem">
+  <div class="wrap">
+    <span class="eyebrow eyebrow--center js-fade">悩み</span>
+    <h2 class="section-h2 section-h2--center js-fade">残したい想いはある。<br>でも、多くの人は書けないまま終わってしまう。</h2>
+    <hr class="section-hr section-hr--center js-fade">
+    <div class="problem-grid">
+      <div class="problem-card js-fade delay-1">
+        <div class="problem-icon">✍️</div>
+        <div class="problem-title">自分なんて本にするほどじゃない</div>
+        <p class="problem-desc">そう思ってしまい、大切な体験や知恵が記録されないまま消えていきます。</p>
+      </div>
+      <div class="problem-card js-fade delay-2">
+        <div class="problem-icon">⏳</div>
+        <div class="problem-title">書く力も時間もない</div>
+        <p class="problem-desc">話すことはできても、原稿にまとめるところで止まってしまいます。</p>
+      </div>
+      <div class="problem-card js-fade delay-3">
+        <div class="problem-icon">💸</div>
+        <div class="problem-title">自費出版は高くて難しそう</div>
+        <p class="problem-desc">従来の自費出版は数百万円、専門知識も必要。一般の人には手が届きませんでした。</p>
+      </div>
+      <div class="problem-card js-fade delay-4">
+        <div class="problem-icon">🌫️</div>
+        <div class="problem-title">残す方法がわからない</div>
+        <p class="problem-desc">家の歴史、地域文化、職人技、会社の哲学をどう形にすればよいか見えません。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     CONCEPT
+     ============================================= -->
+<section class="section section--white" id="concept">
+  <div class="wrap">
+    <span class="eyebrow js-fade">コンセプト</span>
+    <h2 class="section-h2 js-fade">本は、一部の人だけのものじゃない。</h2>
+    <hr class="section-hr js-fade">
+    <div class="concept-inner js-fade">
+      <blockquote class="concept-quote serif">
+        「本は一部の特別な人が書くもの」から、<br>
+        <strong>「だれでも、自分の証を本に残せるもの」へ。</strong>
+      </blockquote>
+      <div>
+        <p class="concept-text">
+          森が目指しているのは、<strong>自叙伝の民主化</strong>です。普通に生きてきた一人ひとりの人生こそ、家族や地域や職場にとってかけがえない価値があります。<br><br>
+          AIはその価値を引き出し、整理し、未来へ残すための道具です。そしてプロ編集者の目と感性が、あなたの言葉を「読ませる物語」へと昇華させます。
+        </p>
+        <div class="concept-tags">
+          <span class="concept-tag">🎙️ 話すだけでOK</span>
+          <span class="concept-tag">🤖 AI文字起こし・構成</span>
+          <span class="concept-tag">👤 プロ編集者が磨く</span>
+          <span class="concept-tag">📸 写真・挿絵</span>
+          <span class="concept-tag">📅 年表制作</span>
+          <span class="concept-tag">📖 印刷・製本対応</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     WHO FOR
+     ============================================= -->
+<section class="section section--light" id="who">
+  <div class="wrap">
+    <span class="eyebrow eyebrow--center js-fade">こんな方へ</span>
+    <h2 class="section-h2 section-h2--center js-fade">こんな方の「本」を作ります</h2>
+    <hr class="section-hr section-hr--center js-fade">
+    <div class="who-grid">
+      <div class="who-card js-fade delay-1">
+        <div class="who-icon">👴</div>
+        <div class="who-title">定年退職される方</div>
+        <p class="who-sub">40年のキャリア、職人技、後輩へのメッセージを本に残す。</p>
+        <span class="who-occasion">退職記念</span>
+      </div>
+      <div class="who-card js-fade delay-2">
+        <div class="who-icon">👵</div>
+        <div class="who-title">喜寿・傘寿を迎える方</div>
+        <p class="who-sub">77年・80年の人生の記録を家族・子孫への贈り物に。</p>
+        <span class="who-occasion">長寿祝い</span>
+      </div>
+      <div class="who-card js-fade delay-3">
+        <div class="who-icon">🏠</div>
+        <div class="who-title">専業主婦・主夫の方</div>
+        <p class="who-sub">家族を支えた日々の記録。子育て、暮らし、地域の記憶を一冊に。</p>
+        <span class="who-occasion">家族への贈り物</span>
+      </div>
+      <div class="who-card js-fade delay-4">
+        <div class="who-icon">🔧</div>
+        <div class="who-title">現場の職人・技術者</div>
+        <p class="who-sub">マニュアル化できない体の感覚、仕事の哲学を次世代に伝える。</p>
+        <span class="who-occasion">技術継承</span>
+      </div>
+      <div class="who-card js-fade delay-1">
+        <div class="who-icon">👩‍👧</div>
+        <div class="who-title">シングルマザー・ファザー</div>
+        <p class="who-sub">苦労と喜びの記録を子どもへ。どう生きたかを正直に残す。</p>
+        <span class="who-occasion">子への遺言</span>
+      </div>
+      <div class="who-card js-fade delay-2">
+        <div class="who-icon">🏭</div>
+        <div class="who-title">中小企業・家業の経営者</div>
+        <p class="who-sub">創業の精神、経営哲学、社風を社員・後継者に伝える社史として。</p>
+        <span class="who-occasion">社史・創業記念</span>
+      </div>
+      <div class="who-card js-fade delay-3">
+        <div class="who-icon">🌾</div>
+        <div class="who-title">地域の語り部</div>
+        <p class="who-sub">地元の文化・風習・地名の由来を記録し、地域の記憶を守る。</p>
+        <span class="who-occasion">文化記録</span>
+      </div>
+      <div class="who-card js-fade delay-4">
+        <div class="who-icon">💍</div>
+        <div class="who-title">金婚式を迎えるご夫妻</div>
+        <p class="who-sub">50年の二人の物語。出会い、子育て、苦労と喜びを一冊に。</p>
+        <span class="who-occasion">金婚式</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     LEGACY
+     ============================================= -->
+<section class="section section--bg-legacy" id="legacy">
+  <div class="wrap">
+    <span class="eyebrow eyebrow--center js-fade">残せるもの</span>
+    <h2 class="section-h2 section-h2--center js-fade">あなたが残せる、3つの遺産</h2>
+    <hr class="section-hr section-hr--center js-fade">
+    <div class="legacy-grid">
+      <div class="legacy-card js-fade delay-1">
+        <div class="legacy-num">01</div>
+        <div class="legacy-icon">❤️</div>
+        <div class="legacy-title">家族への記憶と愛情</div>
+        <p class="legacy-desc">「お父さんってこんな人だったんだ」「おばあちゃんの若い頃が知りたかった」——あなたが語らずにいた本音、生き様、愛情が、子や孫へ届きます。本になることで、語り継がれ続ける。</p>
+      </div>
+      <div class="legacy-card js-fade delay-2">
+        <div class="legacy-num">02</div>
+        <div class="legacy-icon">🏔️</div>
+        <div class="legacy-title">地域の文化と風景</div>
+        <p class="legacy-desc">あなたが子どもの頃に見た祭り、昔の地名、消えた商店街、受け継がれた農法——誰かが記録しなければ消えてしまう、その地域ならではの生きた記憶を本が守ります。</p>
+      </div>
+      <div class="legacy-card js-fade delay-3">
+        <div class="legacy-num">03</div>
+        <div class="legacy-icon">⚙️</div>
+        <div class="legacy-title">仕事の技術と哲学</div>
+        <p class="legacy-desc">マニュアルには書けない「勘」「感覚」「職人の美学」——30年、40年かけて培った技術や経営哲学は、本にすることで後継者・社員・業界全体の財産になります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     PROCESS
+     ============================================= -->
+<section class="section section--dark process-bg" id="flow">
+  <div class="wrap">
+    <span class="eyebrow eyebrow--center js-fade">制作の流れ</span>
+    <h2 class="section-h2 section-h2--center js-fade">お申し込みから完成まで</h2>
+    <hr class="section-hr section-hr--center js-fade">
+    <p class="process-lead js-fade">著者は話すだけ。あとはすべてプロとAIにお任せください。</p>
+    <div class="process-steps js-fade">
+      <div class="process-step">
+        <div class="step-num">STEP 1</div>
+        <div class="step-circle">🤝</div>
+        <div class="step-title">無料相談・<br>方向性確認</div>
+        <p class="step-desc">誰に何を残したいか整理し、企画の方向を決めます。</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">STEP 2</div>
+        <div class="step-circle">🎙️</div>
+        <div class="step-title">約3時間の<br>インタビュー録音</div>
+        <p class="step-desc">マイクに向かって話すだけ。編集者が自然に引き出します。</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">STEP 3</div>
+        <div class="step-circle">🤖</div>
+        <div class="step-title">AI文字起こし・<br>章立て作成</div>
+        <p class="step-desc">AIが音声を整理し、初稿の骨格を作成します。</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">STEP 4</div>
+        <div class="step-circle">✏️</div>
+        <div class="step-title">プロ編集・<br>写真選定・仕上げ</div>
+        <p class="step-desc">写真・年表・挿絵を編集視点で整え、一冊に仕上げます。</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">STEP 5</div>
+        <div class="step-circle">📖</div>
+        <div class="step-title">ご確認・<br>完成・納品</div>
+        <p class="step-desc">確認後、印刷製本またはPDF形式でお届け。少部数対応。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     AI × HUMAN
+     ============================================= -->
+<section class="section section--light" id="ai-human">
+  <div class="wrap">
+    <span class="eyebrow eyebrow--center js-fade">技術と編集の融合</span>
+    <h2 class="section-h2 section-h2--center js-fade">AIとプロ編集者の、最高の連携</h2>
+    <hr class="section-hr section-hr--center js-fade">
+    <div class="ai-inner js-fade">
+      <div class="ai-panel ai-panel--blue">
+        <div class="ai-label">AI の役割</div>
+        <div class="ai-icon">🤖</div>
+        <div class="ai-title serif">速く、正確に、疲れない</div>
+        <ul class="ai-list">
+          <li>3時間の音声を完全文字起こし</li>
+          <li>話の流れを自動で整理・分類</li>
+          <li>章立て案を複数パターン生成</li>
+          <li>誤字脱字・表記ゆれの自動検出</li>
+          <li>挿絵アイデアの提案</li>
+        </ul>
+      </div>
+      <div class="ai-plus">+</div>
+      <div class="ai-panel ai-panel--gold">
+        <div class="ai-label">プロ編集者の役割</div>
+        <div class="ai-icon">👤</div>
+        <div class="ai-title serif">感情を読み、物語を紡ぐ</div>
+        <ul class="ai-list">
+          <li>著者の「伝えたいこと」を引き出す</li>
+          <li>感動のある語り口に整える</li>
+          <li>写真・資料のプロセレクション</li>
+          <li>読者の目線で構成を最終調整</li>
+          <li>品質の最終責任を持つ</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     SCENES / USE CASES
+     ============================================= -->
+<section class="section section--white" id="samples">
+  <div class="wrap">
+    <span class="eyebrow eyebrow--center js-fade">活用例</span>
+    <h2 class="section-h2 section-h2--center js-fade">こんな一冊に広がります</h2>
+    <hr class="section-hr section-hr--center js-fade">
+    <div class="scenes-grid js-fade">
+      <div class="scene-card scene-card--wide">
+        <div class="scene-cat">記念本</div>
+        <div class="scene-icon">🎂</div>
+        <div class="scene-title">喜寿・還暦・金婚式の一冊</div>
+        <p class="scene-desc">人生の節目に、自分の歩みと家族への想いを整理して残す記念出版。苦楽を共にした家族へ届ける、かけがえのないギフトになります。</p>
+      </div>
+      <div class="scene-card">
+        <div class="scene-cat">退職・継承</div>
+        <div class="scene-icon">🏭</div>
+        <div class="scene-title">定年退職・引退の証明書</div>
+        <p class="scene-desc">仕事人生の歩み、後輩へ残したい哲学、現場で培った技術を本にする。</p>
+      </div>
+      <div class="scene-card">
+        <div class="scene-cat">家族史</div>
+        <div class="scene-icon">👨‍👩‍👧</div>
+        <div class="scene-title">主婦・シングルマザーの物語</div>
+        <p class="scene-desc">名もなき努力、家庭を支え抜いた経験、それ自体を家族の財産に変える。</p>
+      </div>
+      <div class="scene-card">
+        <div class="scene-cat">地域文化</div>
+        <div class="scene-icon">🌾</div>
+        <div class="scene-title">地域文化・家の歴史の保存</div>
+        <p class="scene-desc">祭り、食、方言、しきたり、風土。失われやすい地域の記憶を残す。</p>
+      </div>
+      <div class="scene-card">
+        <div class="scene-cat">技能継承</div>
+        <div class="scene-icon">🔧</div>
+        <div class="scene-title">工場・現場の暗黙知の継承</div>
+        <p class="scene-desc">マニュアル化しにくい勘どころや判断基準を、エピソードとともに言語化。</p>
+      </div>
+      <div class="scene-card">
+        <div class="scene-cat">企業文化</div>
+        <div class="scene-icon">🏢</div>
+        <div class="scene-title">企業理念・創業物語の可視化</div>
+        <p class="scene-desc">創業者の想いを一冊にし、採用・教育・社内文化の土台として活用。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     PRICING
+     ============================================= -->
+<section class="section section--bg-price" id="price">
+  <div class="wrap">
+    <span class="eyebrow eyebrow--center js-fade">料金プラン</span>
+    <h2 class="section-h2 section-h2--center js-fade">あなたの物語に合ったプランを</h2>
+    <hr class="section-hr section-hr--center js-fade">
+    <p class="section-sub js-fade">すべてのプランに無料相談・インタビュー・AI文字起こし・プロ編集が含まれます。</p>
+    <div class="price-grid">
+
+      <div class="price-card js-fade delay-1">
+        <div class="price-badge">STANDARD</div>
+        <div class="price-plan-name">記念本プラン</div>
+        <p class="price-plan-sub">個人の方・ご家族向け<br>はじめての一冊に</p>
+        <div class="price-amount">¥298,000<span>〜</span></div>
+        <p class="price-tax">税込 ¥327,800〜</p>
+        <ul class="price-features">
+          <li>約3時間のインタビュー録音</li>
+          <li>AI文字起こし・章立て</li>
+          <li>プロ編集・校正</li>
+          <li>写真セレクト（提供素材より）</li>
+          <li>PDF納品 / 5部まで印刷製本</li>
+        </ul>
+        <button class="price-cta">相談・見積もりを依頼する</button>
+      </div>
+
+      <div class="price-card price-card--featured js-fade delay-2">
+        <div class="price-badge">PREMIUM</div>
+        <div class="price-plan-name">プレミアムプラン</div>
+        <p class="price-plan-sub">写真・年表・挿絵を充実させた<br>本格的な一冊に</p>
+        <div class="price-amount">¥498,000<span>〜</span></div>
+        <p class="price-tax">税込 ¥547,800〜</p>
+        <ul class="price-features">
+          <li>STANDARDの全内容</li>
+          <li>年表・挿絵の制作</li>
+          <li>写真レタッチ・レイアウト強化</li>
+          <li>装丁デザインのカスタマイズ</li>
+          <li>10部まで印刷製本</li>
+        </ul>
+        <button class="price-cta">相談・見積もりを依頼する</button>
+      </div>
+
+      <div class="price-card js-fade delay-3">
+        <div class="price-badge">CORPORATE</div>
+        <div class="price-plan-name">法人・組織向けプラン</div>
+        <p class="price-plan-sub">社史・技術継承・創業記念本<br>企業・団体のニーズに対応</p>
+        <div class="price-amount" style="font-size: 1.8rem; padding-top: 0.4rem;">お見積もり</div>
+        <p class="price-tax">規模・内容により個別対応</p>
+        <ul class="price-features">
+          <li>複数名へのインタビュー対応</li>
+          <li>社内向け多部数印刷</li>
+          <li>電子書籍・PDF配布版</li>
+          <li>著作権・肖像権の確認サポート</li>
+          <li>納品後の改訂・増刷対応</li>
+        </ul>
+        <button class="price-cta">詳細・見積もりを問い合わせる</button>
+      </div>
+
+    </div>
+    <p class="price-note js-fade">※表示価格はすべて目安です。内容・ページ数・部数により変動します。まずはお気軽にご相談ください。</p>
+  </div>
+</section>
+
+<!-- =============================================
+     FAQ
+     ============================================= -->
+<section class="section section--light" id="faq">
+  <div class="wrap">
+    <span class="eyebrow eyebrow--center js-fade">よくある質問</span>
+    <h2 class="section-h2 section-h2--center js-fade">FAQ</h2>
+    <hr class="section-hr section-hr--center js-fade">
+    <div class="faq-list js-fade">
+
+      <div class="faq-item is-open">
+        <div class="faq-q">
+          <span>文章が苦手でも大丈夫ですか？</span>
+          <i class="faq-icon">+</i>
+        </div>
+        <div class="faq-body">
+          <div class="faq-body-inner">大丈夫です。このサービスは「書ける人」のためではなく、「話せる人」のための設計です。文章力は一切不要で、インタビュアーの問いに答えながら自然に話していただくだけで進められます。</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>何を話せばいいかわからなくても進められますか？</span>
+          <i class="faq-icon">+</i>
+        </div>
+        <div class="faq-body">
+          <div class="faq-body-inner">はい。こちらで問いを用意し、人生の転機、家族の思い出、仕事の工夫などテーマごとに整理しながら進めます。最初の無料相談で方向性を決めるので、「何を話せばいいか」が自然と見えてきます。</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>企業や工場の技能継承にも使えますか？</span>
+          <i class="faq-icon">+</i>
+        </div>
+        <div class="faq-body">
+          <div class="faq-body-inner">使えます。現場の暗黙知やベテランの判断基準、創業者の思想など、マニュアルにしにくい領域ほど相性があります。社内向けの技術継承本や社史・創業記念本としてもご活用いただけます。</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>写真や年表も入れられますか？</span>
+          <i class="faq-icon">+</i>
+        </div>
+        <div class="faq-body">
+          <div class="faq-body-inner">はい。ご提供いただいた写真や資料の中から、編集視点で選定して組み込みます。年表や挿絵の制作も対応しておりますので、お気軽にご相談ください。</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>完成までどのくらいかかりますか？</span>
+          <i class="faq-icon">+</i>
+        </div>
+        <div class="faq-body">
+          <div class="faq-body-inner">内容や分量によって異なりますが、標準的なケースで2〜4ヶ月程度を想定しています。お祝いや記念日に間に合わせたいなど、ご希望があれば相談時にお知らせください。</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>何部から印刷できますか？</span>
+          <i class="faq-icon">+</i>
+        </div>
+        <div class="faq-body">
+          <div class="faq-body-inner">少部数（1〜10部程度）からの印刷・製本に対応しています。デジタルPDFのみでの納品も可能です。家族分の数冊から社員全員分まで、ご要望に応じてご相談ください。</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     MESSAGE
+     ============================================= -->
+<section class="section section--white" id="message">
+  <div class="wrap">
+    <div class="message-inner js-fade">
+      <h2 class="message-h2 serif">
+        「本は一部の特別な人が書くもの」という<br>
+        常識を、終わりにしよう。
+      </h2>
+      <div class="message-body">
+        <p>歴史に名を残す偉人の伝記も素晴らしいですが、私たち一人ひとりの人生にこそ、かけがえのないドラマがあり、次世代へ伝えるべきノウハウがあります。</p>
+        <p>あなたの生き様、地域の伝統、会社の文化。これらはすべて、社会の貴重な財産です。</p>
+        <p class="message-accent">自分の証を残そう。地域の伝統を残そう。会社の文化を残そう。</p>
+        <p>最新のテクノロジーとプロの編集力で、あなたの人生を「究極の贈り物」にするお手伝いをさせてください。</p>
+      </div>
+      <div class="message-sign">
+        <p>企画・発起人</p>
+        <p class="name">森</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     CTA
+     ============================================= -->
+<section class="section section--bg-cta cta-section" id="contact">
+  <div class="wrap js-fade">
+    <h2 class="cta-h2 serif">
+      あなたの物語を、<br>未来へ手渡しませんか。
+    </h2>
+    <p class="cta-sub">まずはオンラインでの無料相談、または詳しい資料をお取り寄せください。</p>
+    <div class="cta-btns">
+      <button class="btn-primary">無料相談を予約する</button>
+      <button class="btn-secondary">詳しい資料を請求する</button>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     FOOTER
+     ============================================= -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>森の聞き書き出版</h3>
+      <p>話すだけで、本になる。<br>AI×プロ編集者が、あなたの人生・地域の文化・会社の暗黙知を一冊の本にします。</p>
+    </div>
+    <div class="footer-col">
+      <h4>サービス</h4>
+      <ul>
+        <li><a href="#who">こんな方に</a></li>
+        <li><a href="#legacy">残せるもの</a></li>
+        <li><a href="#flow">制作の流れ</a></li>
+        <li><a href="#samples">活用例</a></li>
+        <li><a href="#price">料金プラン</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>お問い合わせ</h4>
+      <ul>
+        <li><a href="#contact">無料相談</a></li>
+        <li><a href="#contact">資料請求</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 森の聞き書き出版. All rights reserved.</div>
+</footer>
+
+<!-- =============================================
+     JAVASCRIPT
+     ============================================= -->
+<script>
+(function () {
+  "use strict";
+
+  /* --- スクロールアニメーション --- */
+  var fadeEls = document.querySelectorAll(".js-fade");
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  fadeEls.forEach(function (el) {
+    observer.observe(el);
+  });
+
+  /* --- FAQ アコーディオン --- */
+  var faqItems = document.querySelectorAll(".faq-item");
+
+  /* 最初の項目を開く */
+  var firstItem = document.querySelector(".faq-item.is-open");
+  if (firstItem) {
+    var firstBody = firstItem.querySelector(".faq-body");
+    firstBody.style.maxHeight = firstBody.scrollHeight + "px";
+  }
+
+  faqItems.forEach(function (item) {
+    var q    = item.querySelector(".faq-q");
+    var body = item.querySelector(".faq-body");
+
+    q.addEventListener("click", function () {
+      var isOpen = item.classList.contains("is-open");
+
+      /* 全部閉じる */
+      faqItems.forEach(function (i) {
+        i.classList.remove("is-open");
+        i.querySelector(".faq-body").style.maxHeight = "0";
+      });
+
+      /* クリックしたものが閉じていたら開く */
+      if (!isOpen) {
+        item.classList.add("is-open");
+        body.style.maxHeight = body.scrollHeight + "px";
+      }
+    });
+  });
+
+}());
+</script>
+
+</body>
+</html>
